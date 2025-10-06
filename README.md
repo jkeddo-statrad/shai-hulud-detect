@@ -1,3 +1,49 @@
+# ############################################
+This is a Windows, Powershell 7 focused, fork of the Shai-Hulud detector script published here:
+https://github.com/Cobenian/shai-hulud-detect
+
+
+My attempt at running the original script inside
+git bash for Windows took 3 days on a partial subset of my local repositories only to hang without finishing.
+
+I wanted to antivirus at first but then I realized
+git bash for Windows is not a true native core-OS-optimized tool like bash on linux/OSX is. Powershell fills that role for Windows machines, not Bash.
+
+I spent my some time trying to vibe code a translation
+of this that would run better on my work Windows machine. Changes include:
+
+- Conversion of powershell 7 (not built in powershell version)
+- Parallelization support
+- More error handling (to prevent crashing)
+- Resumability from error state
+
+So far, in my testing, the conversion works. Not only that, but the script finished scanning **all** of my repositories in about 4 hours. This version of the script runs about 30-40 times faster than the original version for my Windows machine.
+
+Please note: While I have spent time manually verifying the correctness of this script's results, I cannot verify it returns findings 100% identically to the previous script. Treat this script to be 'as-is'.
+
+### Installing Powershell 7 (speedier)(required)
+
+1. Install with WinGet: `winget install --id Microsoft.Powershell --source winget`
+2. Open "PowerShell 7" from Start Menu or press win+R and type "pwsh", press enter.
+3. You should see a shell opened saying indicating you are using Powershell 7.
+
+
+### Running the Script
+
+1. Set Powershell 7 to this directory
+2. Copy paste this script and update it to use the local dirs on your PC: ` pwsh -NoLogo -NoProfile -File .\shai-hulud-detector.ps1 -ScanDir 'C:\Users\[YOUR_USERNAME]\source\organizations\statpacs\StatView2' -Parallelism 16 -StatePath 'C:\temp\shai_state.json' -ProgressLog 'C:\temp\shai_progress.log'`
+3. If possible, close other heavy apps. Our company laptops have 22 logical cores, and I allocated 16 of them to running this script in step 2. Alternatively, you could also leave this script running overnight.
+
+# ############################################
+# ############################################
+# ############################################
+# ############################################
+ORIGINAL README
+# ############################################
+# ############################################
+# ############################################
+# ############################################
+
 # Shai-Hulud NPM Supply Chain Attack Detector
 
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
